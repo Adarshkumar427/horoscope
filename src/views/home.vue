@@ -26,12 +26,14 @@ const period = ref('today')
 const language = ref('english')
 const type = ref('overall')
 const date = ref()
-
+const loading = ref(false)
 
 async function getHoroscope() {
     if (!zodiac.value) {
         return
     }
+
+    loading.value = true
     const requestBody = {
         zodiac: zodiac.value,
         language: language.value,
@@ -69,6 +71,7 @@ async function getHoroscope() {
         }
 
     }
+    loading.value = false
 }
 
 watch([zodiac, language, period], getHoroscope);
@@ -96,7 +99,7 @@ watch([zodiac, language, period], getHoroscope);
                     </v-btn>
 
                     <v-btn value="tomorrow">
-                        Tomorrow
+                        Tomorr
                     </v-btn>
 
                     <v-btn value="weekly">
@@ -104,7 +107,7 @@ watch([zodiac, language, period], getHoroscope);
                     </v-btn>
 
                     <v-btn value="monthly">
-                        Monthly
+                        Month
                     </v-btn>
                 </v-btn-toggle>
             </div>
@@ -123,42 +126,45 @@ watch([zodiac, language, period], getHoroscope);
         </div>
 
         <v-card class="mt-6">
-            <v-tabs v-model="type" align-tabs="start" color="deep-purple-accent-4">
-                <v-tab value="overall">Overall</v-tab>
-                <v-tab value="love">Love</v-tab>
-                <v-tab value="finance">Finance</v-tab>
-                <v-tab value="career">Career</v-tab>
-                <v-tab value="health">Health</v-tab>
-            </v-tabs>
-            <v-card-text>
-                <v-tabs-window v-model="type" class="text-justify">
-                    <v-tabs-window-item value="overall">
-                        <v-container fluid>
-                            <p>{{ primary }}</p>
-                        </v-container>
-                    </v-tabs-window-item>
-                    <v-tabs-window-item value="love">
-                        <v-container fluid>
-                            <p>{{ love }}</p>
-                        </v-container>
-                    </v-tabs-window-item>
-                    <v-tabs-window-item value="finance">
-                        <v-container fluid>
-                            <p>{{ general }}</p>
-                        </v-container>
-                    </v-tabs-window-item>
-                    <v-tabs-window-item value="career">
-                        <v-container fluid>
-                            <p>{{ career }}</p>
-                        </v-container>
-                    </v-tabs-window-item>
-                    <v-tabs-window-item value="health">
-                        <v-container fluid>
-                            <p>{{ health }}</p>
-                        </v-container>
-                    </v-tabs-window-item>
-                </v-tabs-window>
-            </v-card-text>
+            <v-skeleton-loader v-if="loading" type="article"></v-skeleton-loader>
+            <template v-else>
+                <v-tabs v-model="type" align-tabs="start" color="deep-purple-accent-4">
+                    <v-tab value="overall">Overall</v-tab>
+                    <v-tab value="love">Love</v-tab>
+                    <v-tab value="finance">Finance</v-tab>
+                    <v-tab value="career">Career</v-tab>
+                    <v-tab value="health">Health</v-tab>
+                </v-tabs>
+                <v-card-text>
+                    <v-tabs-window v-model="type" class="text-justify">
+                        <v-tabs-window-item value="overall">
+                            <v-container fluid>
+                                <p>{{ primary }}</p>
+                            </v-container>
+                        </v-tabs-window-item>
+                        <v-tabs-window-item value="love">
+                            <v-container fluid>
+                                <p>{{ love }}</p>
+                            </v-container>
+                        </v-tabs-window-item>
+                        <v-tabs-window-item value="finance">
+                            <v-container fluid>
+                                <p>{{ general }}</p>
+                            </v-container>
+                        </v-tabs-window-item>
+                        <v-tabs-window-item value="career">
+                            <v-container fluid>
+                                <p>{{ career }}</p>
+                            </v-container>
+                        </v-tabs-window-item>
+                        <v-tabs-window-item value="health">
+                            <v-container fluid>
+                                <p>{{ health }}</p>
+                            </v-container>
+                        </v-tabs-window-item>
+                    </v-tabs-window>
+                </v-card-text>
+            </template>
         </v-card>
 
     </v-container>
@@ -168,7 +174,6 @@ watch([zodiac, language, period], getHoroscope);
 <style scoped>
 .position-fixed {
     position: fixed;
-    /* Ensures the element is taken out of the normal document flow */
     top: 0;
     left: 0;
     width: 100%;
