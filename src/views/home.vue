@@ -79,16 +79,16 @@ watch([zodiac, language, period], getHoroscope);
 <template>
 
     <v-container>
-        <v-card color="deep-purple-accent-3">
+        <v-card color="deep-purple-accent-3" class="position-fixed mb-2">
             <v-nav>
                 <h1 class="text-center mt-1 mb-2 text-white">Free Horoscope</h1>
             </v-nav>
         </v-card>
 
-        <v-select class=" mt-5 mb-5" v-model="zodiac" label="zodiac" :items="items" item-title="title"
+        <v-select class=" mt-16 mb-5" v-model="zodiac" label="zodiac" :items="items" item-title="title"
             item-value="value"></v-select>
 
-        <div class="d-flex">
+        <div class="d-flex justify-space-between align-center flex-wrap ">
             <div>
                 <v-btn-toggle v-model="period" color="deep-purple-accent-3" rounded="0" group>
                     <v-btn value="today">
@@ -108,9 +108,9 @@ watch([zodiac, language, period], getHoroscope);
                     </v-btn>
                 </v-btn-toggle>
             </div>
-            <v-spacer></v-spacer>
+
             <div>
-                <v-btn-toggle v-model="language" color="deep-purple-accent-3" rounded="0" group>
+                <v-btn-toggle v-model="language" color="deep-purple-accent-3" rounded="0" group class="language-toggle">
                     <v-btn value="english">
                         English
                     </v-btn>
@@ -131,7 +131,7 @@ watch([zodiac, language, period], getHoroscope);
                 <v-tab value="health">Health</v-tab>
             </v-tabs>
             <v-card-text>
-                <v-tabs-window v-model="type">
+                <v-tabs-window v-model="type" class="text-justify">
                     <v-tabs-window-item value="overall">
                         <v-container fluid>
                             <p>{{ primary }}</p>
@@ -164,3 +164,25 @@ watch([zodiac, language, period], getHoroscope);
     </v-container>
 
 </template>
+
+<style scoped>
+.position-fixed {
+    position: fixed;
+    /* Ensures the element is taken out of the normal document flow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    /* Assign a reasonable z-index */
+}
+
+.language-toggle {
+    margin-left: auto;
+}
+
+@media (max-width: 650px) {
+    .language-toggle {
+        margin-top: 16px;
+    }
+}
+</style>
