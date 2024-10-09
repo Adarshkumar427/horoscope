@@ -82,7 +82,7 @@ watch([zodiac, language, period], getHoroscope);
 <template>
 
     <v-container>
-        <v-card color="deep-purple-accent-3" class="position-fixed mb-2">
+        <v-card color="deep-purple-accent-3" class="position mb-2">
             <v-nav>
                 <h1 class="text-center mt-1 mb-2 text-white">Free Horoscope</h1>
             </v-nav>
@@ -103,7 +103,7 @@ watch([zodiac, language, period], getHoroscope);
                     </v-btn>
 
                     <v-btn value="weekly">
-                        Weekly
+                        Week
                     </v-btn>
 
                     <v-btn value="monthly">
@@ -172,7 +172,7 @@ watch([zodiac, language, period], getHoroscope);
 </template>
 
 <style scoped>
-.position-fixed {
+.position {
     position: fixed;
     top: 0;
     left: 0;
