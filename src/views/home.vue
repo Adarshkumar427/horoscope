@@ -91,7 +91,41 @@ watch([zodiac, language, period], getHoroscope);
         <v-select class=" mt-16 mb-5" v-model="zodiac" label="zodiac" :items="items" item-title="title"
             item-value="value"></v-select>
 
-        <div class="d-flex justify-space-between align-center flex-wrap ">
+        <div class="d-flex justify-space-between align-center flex-wrap manage">
+            <div>
+                <v-btn-toggle v-model="period" color="deep-purple-accent-3" rounded="0" group>
+                    <v-btn value="today">
+                        Today
+                    </v-btn>
+
+                    <v-btn value="tomorrow">
+                        Tomorrow
+                    </v-btn>
+
+                    <v-btn value="weekly">
+                        Weekly
+                    </v-btn>
+
+                    <v-btn value="monthly">
+                        Monthly
+                    </v-btn>
+                </v-btn-toggle>
+            </div>
+
+            <div>
+                <v-btn-toggle v-model="language" color="deep-purple-accent-3" rounded="0" group class="language-toggle">
+                    <v-btn value="english">
+                        English
+                    </v-btn>
+
+                    <v-btn value="hindi">
+                        Hindi
+                    </v-btn>
+                </v-btn-toggle>
+            </div>
+        </div>
+
+        <div class="d-flex justify-space-between align-center flex-wrap change">
             <div>
                 <v-btn-toggle v-model="period" color="deep-purple-accent-3" rounded="0" group>
                     <v-btn value="today">
@@ -185,9 +219,21 @@ watch([zodiac, language, period], getHoroscope);
     margin-left: auto;
 }
 
+.change {
+    display: none !important;
+}
+
 @media (max-width: 650px) {
     .language-toggle {
         margin-top: 16px;
+    }
+
+    .manage {
+        display: none !important;
+    }
+
+    .change {
+        display: block !important;
     }
 }
 </style>
